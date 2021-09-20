@@ -19,12 +19,12 @@ var target;
 
 function setup() 
 {
-    cnv = createCanvas(500, 500);
+    cnv = createCanvas(1000, 1000);
     centerCanvas();
     background(0);
 
     
-    var n = 20, m = 20;
+    var n = 50, m = 50;
     maze = new Maze(n, m, 4, 4);
     
     start = maze.getRandomCell();
