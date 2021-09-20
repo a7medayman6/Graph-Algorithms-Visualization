@@ -24,7 +24,7 @@ function setup()
     background(0);
 
     
-    var n = 50, m = 50;
+    var n = 40, m = 40;
     maze = new Maze(n, m, 4, 4);
     
     start = maze.getRandomCell();
