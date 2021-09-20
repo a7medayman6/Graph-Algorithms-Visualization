@@ -19,7 +19,7 @@ var target;
 
 function setup() 
 {
-    cnv = createCanvas(1000, 1000);
+    cnv = createCanvas(800, 800);
     centerCanvas();
     background(0);
 
