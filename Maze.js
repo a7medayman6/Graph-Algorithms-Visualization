@@ -79,7 +79,7 @@ class Maze
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
     }
-
+    
     getRandomCell()
     {
         var i = this.getRandomInt(0, this.n);

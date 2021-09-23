@@ -1,28 +1,31 @@
-class BFS
+class BFS extends Pathfinding
 {   
     queue = new Queue();
-    constructor()
-    {
-    }
-
-    exploreNeighbours(node) 
+    exploreNeighbours(node,e) 
     {
         for(var i = 0; i < node.neighbours.length; i++)
         {
             var neighbour = node.neighbours[i];
             if(!neighbour.visited)
-            {
+            {   
                 neighbour.setVisited(true);
                 neighbour.setParent(node);
-                this.queue.Enqueue(neighbour);
+                if(!this.foundtarget(neighbour,e))
+                {
+                    this.queue.Enqueue(neighbour);
+                }
+                else
+                {
+                    return true;
+                }
                 //maze.show();
             }
         }
+        return false;
     }
-
+   
     async solve(s, e)
     {
-        
         s.setVisited(true);
         this.queue.Enqueue(s);
 
@@ -30,16 +33,10 @@ class BFS
         {
             var node = this.queue.GetFront();
             this.queue.Dequeue();
-
-            if(node === e)
+            if(this.exploreNeighbours(node,e))
             {
-                node.setTarget(true);
-                //maze.show();
-                this.backtrack(node);
-                return true;
+                break;
             }
-            
-            this.exploreNeighbours(node);
             //maze.show();
 
             await new Promise(r => setTimeout(r, 50));
@@ -47,14 +44,5 @@ class BFS
         return false;
     }
 
-    async backtrack(node)
-    {
-        node.setTarget(true);
-        if(node.parent === null)
-            return;
-        await new Promise(r => setTimeout(r, 100));
-
-        this.backtrack(node.parent);
-    }
-
+   
 }

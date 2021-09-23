@@ -13,7 +13,7 @@ function windowResized()
 }
 
 var maze;
-var bfs;
+var pathfinding;
 var start;
 var target;
 
@@ -30,15 +30,12 @@ function setup()
     start = maze.getRandomCell();
     target = maze.getRandomCell();
     
-    bfs = new BFS()
+    pathfinding = new BFS()
     maze.markStartandEnd(start, target);
-    var solved = bfs.solve(start, target);
-
-    
+    var solved = pathfinding.solve(start, target);
 }
 
 function draw()
 {
     maze.show();
-
 }
