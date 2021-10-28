@@ -1,6 +1,6 @@
-class BFS extends Pathfinding
+class DFS extends Pathfinding
 {   
-    queue = new Queue();
+    stack = []
     exploreNeighbours(node,e) 
     {
         for(var i = 0; i < node.neighbours.length; i++)
@@ -10,15 +10,11 @@ class BFS extends Pathfinding
             {   
                 neighbour.setVisited(true);
                 neighbour.setParent(node);
+
                 if(!this.foundtarget(neighbour,e))
-                {
-                    this.queue.Enqueue(neighbour);
-                }
+                    this.stack.push(neighbour);
                 else
-                {
                     return true;
-                }
-                //maze.show();
             }
         }
         return false;
@@ -27,18 +23,15 @@ class BFS extends Pathfinding
     async solve(s, e)
     {
         s.setVisited(true);
-        this.queue.Enqueue(s);
+        this.stack.push(s);
 
-        while(!this.queue.IsEmpty())
+        while(this.stack.length > 0)
         {
-            var node = this.queue.GetFront();
-            this.queue.Dequeue();
+            var node = this.stack.pop();
+            
             if(this.exploreNeighbours(node,e))
-            {
                 break;
-            }
-            //maze.show();
-
+        
             await new Promise(r => setTimeout(r, 50));
         }
         return false;

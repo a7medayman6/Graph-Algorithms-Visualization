@@ -6,6 +6,7 @@ class Cell
     parent = null;
     start = false;
     neighbours = [];
+    
     static w;
     static h;
 
@@ -39,8 +40,19 @@ class Cell
     {
         this.visited = visited;
         // yellow for visited
-        if(visited && !this.start)
+        if(visited && !this.start && !this.target)
             this.col = color(128,128,128);
+    }
+    setCol(col)
+    {
+        this.col = col;
+    }
+    setMouse(mouse)
+    {
+        if(mouse && !this.start && !this.target)
+            this.col = color(255, 0, 0);
+        else if(!mouse && !this.start && !this.target)
+            this.setVisited(true);
     }
     setTarget(target)
     {
